@@ -2,13 +2,18 @@ name: Hello world
 author: ansoni
 description: My first actions
 inputs:
-  who-to-greet:
-    description: Who to greet
+  title:
+    description: The title
     required: true
-    default: Ansoni
+  body:
+    description: The body
+    required: true
+  assignees:
+    description: The assignees
+    required: true
 outputs:
-  time:
-    description: The greeting time
+  issue:
+    description: Information about the issue
 runs:
   using: 'node12'
   main: 'dist/index.js'
