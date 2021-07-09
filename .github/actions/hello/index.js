@@ -1,14 +1,19 @@
 const core = require("@actions/core");
+const github = require("@actions/github");
 
-try {
-  const name = core.getInput("who-to-greet");
-  console.log(`Hello ${name}`);
+const token = core.getInput("token");
+const title = core.getInput("title");
+const body = core.getInput("body");
+const assignees = core.getInput("assignees");
 
-  const time = new Date().toTimeString();
-  core.setOutput("time", time);
+const octokit = new github.Github(token);
 
-//throw new Error("Example error message");
+const response = octokit.issues.create({
+	owner: github.context.repo.owner,
+	repo: github.context.repo.repo,
+	title,
+	body,
+	assignees: assignees ? assignees.split("\\") : undefined
+})
 
-} catch (error) {
-  core.setFailed(error.message);
-}
+core.setOutput('issue', JSON.stringify(response.data));

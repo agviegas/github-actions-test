@@ -5,8 +5,12 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: ./.github/actions/hello
-        id: hello
+        id: issue
         with: 
-          who-to-greet: Ansonio
+          token: ${{secrets.GITHUB_TOKEN}}
+          title: Example title
+          body: Example body
+          assignees: |
+            agviegas
       - run: |
-          echo ${{ steps.hello.outputs }}
+          echo ${{ steps.issue.outputs.issue }}
