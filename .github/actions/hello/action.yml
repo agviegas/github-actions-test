@@ -2,6 +2,9 @@ name: Hello world
 author: ansoni
 description: My first actions
 inputs:
+  token:
+    description: The github token
+    required: true
   title:
     description: The title
     required: true
